@@ -2,38 +2,117 @@
 
 window.renderStatistics = function (ctx, names, times) {
 
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-  ctx.fillRect(110, 20, 420, 270);
-  ctx.fillStyle = '#ffffff';
-  ctx.fillRect(100, 10, 420, 270);
-  ctx.fillStyle = '#000000';
-  ctx.font = '16px PT Mono';
-  ctx.fillText('Ура, вы победили!', 120, 50);
-  ctx.fillText('Список результатов:', 120, 70);
-
   var HISTOGRAM_HEIGHT = 150;
   var COLUMN_WIDTH = 40;
   var COLUMN_GAP = 50;
   var INITIAL_X = 150;
   var INITIAL_Y = 250;
-  var playersMaxTime = -1;
-  var columnHeight = -1;
-  var offsetX = COLUMN_WIDTH + COLUMN_GAP;
+  var COLOR_RED = '#ff0000';
+  var COLOR_WHITE = '#ffffff';
+  var COLOR_BLACK = '#000000';
 
-  for (var i = 0; i < times.length; i++) {
-    if (times[i] > playersMaxTime) {
-      playersMaxTime = times[i];
-    }
+  function getMaxOfArray(numArray) {
+    return Math.max.apply(null, numArray);
   }
 
-  var step = HISTOGRAM_HEIGHT / (playersMaxTime - 0);
+  function getRandomOpacity() {
+    return +(Math.random() * 0.5 + 0.5).toFixed(2);
+  }
 
-  for (i = 0; i < times.length; i++) {
-    ctx.fillStyle = (names[i] === 'Вы') ? '#ff0000' : 'rgba(0, 0, 255,' + Math.random() + ')';
+  function getRandomBlue() {
+    return 'rgba(0, 0, 255, ' + getRandomOpacity() + ')';
+  }
+
+  function drawCloud(options) {
+    var posX = options.posX || 0;
+    var posY = options.posY || 0;
+    var width = options.width || 100;
+    var height = options.height || 50;
+    var bgColor = options.bgColor || COLOR_WHITE;
+    var shadowColor = options.shadowColor || 'rgba(0, 0, 0, 0.7)';
+    var shadowOffset = options.shadowOffset || 10;
+
+    ctx.fillStyle = shadowColor;
+    ctx.fillRect(posX + shadowOffset, posY + shadowOffset, width, height);
+    ctx.fillStyle = bgColor;
+    ctx.fillRect(posX, posY, width, height);
+  }
+
+  function renderText(options) {
+    var text = options.text || '';
+    var fontFamily = options.fontFamily || 'PT Mono';
+    var fontSize = options.fontSize || '16px';
+    var fontColor = options.fontColor || COLOR_BLACK;
+    var posX = options.posX || 0;
+    var posY = options.posY || 0;
+
+    ctx.fillStyle = fontColor;
+    ctx.font = fontSize + fontFamily;
+    ctx.fillText(text, posX, posY);
+  }
+
+  function drawColumn(options) {
+    var posX = options.posX;
+    var posY = options.posY;
+    var width = options.width;
+    var height = options.height;
+    var color = options.color;
+    var textColor = options.textColor || COLOR_BLACK;
+    var playerName = options.playerName;
+    var playerTime = options.playerTime;
+
+    ctx.fillStyle = color;
+    ctx.fillRect(posX, posY, width, height);
+
+    renderText({
+      text: playerName,
+      fontColor: textColor,
+      posX: posX,
+      posY: posY + height + 20
+    });
+
+    renderText({
+      text: playerTime,
+      fontColor: textColor,
+      posX: posX,
+      posY: posY - 10
+    });
+  }
+
+  drawCloud({
+    posX: 100,
+    posY: 10,
+    width: 420,
+    height: 270
+  });
+
+  renderText({
+    text: 'Ура, вы победили',
+    posX: 120,
+    posY: 50
+  });
+
+  renderText({
+    text: 'Список результатов:',
+    posX: 120,
+    posY: 70
+  });
+
+  var playersMaxTime = getMaxOfArray(times);
+  var columnHeight = -1;
+  var offsetX = COLUMN_WIDTH + COLUMN_GAP;
+  var step = HISTOGRAM_HEIGHT / playersMaxTime;
+
+  for (var i = 0; i < times.length; i++) {
     columnHeight = step * times[i];
-    ctx.fillRect(INITIAL_X + offsetX * i, INITIAL_Y - columnHeight, COLUMN_WIDTH, columnHeight);
-    ctx.fillStyle = '#000000';
-    ctx.fillText(names[i], INITIAL_X + offsetX * i, INITIAL_Y + 20);
-    ctx.fillText(Math.round(times[i]), INITIAL_X + offsetX * i, INITIAL_Y - columnHeight - 10);
+    drawColumn({
+      posX: INITIAL_X + offsetX * i,
+      posY: INITIAL_Y - columnHeight,
+      width: COLUMN_WIDTH,
+      height: columnHeight,
+      color: (names[i] === 'Вы') ? COLOR_RED : getRandomBlue(),
+      playerName: names[i],
+      playerTime: Math.round(times[i])
+    });
   }
 };
