@@ -51,7 +51,7 @@ window.renderStatistics = function (ctx, names, times) {
     ctx.fillText(text, posX, posY);
   }
 
-  function drawColumn(options) {
+  function drawBar(options) {
     var posX = options.posX;
     var posY = options.posY;
     var width = options.width;
@@ -105,7 +105,7 @@ window.renderStatistics = function (ctx, names, times) {
 
   for (var i = 0; i < times.length; i++) {
     columnHeight = step * times[i];
-    drawColumn({
+    drawBar({
       posX: INITIAL_X + offsetX * i,
       posY: INITIAL_Y - columnHeight,
       width: COLUMN_WIDTH,
