@@ -45,16 +45,16 @@ var drawHistogram = function (ctx, posX, posY, names, times) {
   var CURRENT_PLAYER_COLOR = '#ff0000';
   var color;
   var playersMaxTime = getMaxOfArray(times);
-  var BarHeight = -1;
+  var barHeight = -1;
   var offsetX = BAR_WIDTH + COLUMN_GAP;
   var step = HISTOGRAM_HEIGHT / playersMaxTime;
 
   for (var i = 0; i < times.length; i++) {
-    BarHeight = step * times[i];
-    color = (names[i] === CURRENT_PLAYER_NAME) ? CURRENT_PLAYER_COLOR : getRandomBlue();
+    barHeight = step * times[i];
+    color = names[i] === CURRENT_PLAYER_NAME ? CURRENT_PLAYER_COLOR : getRandomBlue();
 
-    drawRect(ctx, posX + offsetX * i, posY - BarHeight, BAR_WIDTH, BarHeight, color);
-    renderText(ctx, names[i], posX + offsetX * i, posY - BarHeight - 10);
+    drawRect(ctx, posX + offsetX * i, posY - barHeight, BAR_WIDTH, barHeight, color);
+    renderText(ctx, names[i], posX + offsetX * i, posY - barHeight - 10);
     renderText(ctx, Math.round(times[i]), posX + offsetX * i, posY + 20);
   }
 };
