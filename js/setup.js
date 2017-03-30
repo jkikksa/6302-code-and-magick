@@ -57,14 +57,11 @@ var getRandomArrayItem = function (array) {
  * @return {Object}
  */
 var generateWizard = function () {
-  var randomFullName = getRandomArrayItem(WIZARDS_NAMES) + ' ' + getRandomArrayItem(WIZARDS_SURNAMES);
-  var randomCoatColor = getRandomArrayItem(WIZARDS_COATCOLORS);
-  var randomEyesColor = getRandomArrayItem(WIZARDS_EYESCOLOR);
 
   var wizard = {
-    'name': randomFullName,
-    'coatColor': randomCoatColor,
-    'eyesColor': randomEyesColor
+    'name': getRandomArrayItem(WIZARDS_NAMES) + ' ' + getRandomArrayItem(WIZARDS_SURNAMES),
+    'coatColor': getRandomArrayItem(WIZARDS_COATCOLORS),
+    'eyesColor': getRandomArrayItem(WIZARDS_EYESCOLOR)
   };
 
   return wizard;
