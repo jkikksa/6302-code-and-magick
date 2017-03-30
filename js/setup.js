@@ -13,16 +13,16 @@ var WIZARDS_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', '�
 var WIZARDS_SURNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
 
 /**
-* Wizard's coat color
+* Wizard's coat colors
 * @const {Array<string>}
 */
 var WIZARDS_COATCOLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 
 /**
-* Wizard's eye color
+* Wizard's eye colors
 * @const {Array<string>}
 */
-var WIZARDS_EYESCOLOR = ['black', 'red', 'blue', 'yellow', 'green'];
+var WIZARDS_EYESCOLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 
 /**
  * Remove class from the element
@@ -61,7 +61,7 @@ var generateWizard = function () {
   var wizard = {
     'name': getRandomArrayItem(WIZARDS_NAMES) + ' ' + getRandomArrayItem(WIZARDS_SURNAMES),
     'coatColor': getRandomArrayItem(WIZARDS_COATCOLORS),
-    'eyesColor': getRandomArrayItem(WIZARDS_EYESCOLOR)
+    'eyesColor': getRandomArrayItem(WIZARDS_EYESCOLORS)
   };
 
   return wizard;
