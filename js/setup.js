@@ -25,53 +25,51 @@ var WIZARDS_COATCOLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 1
 var WIZARDS_EYESCOLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 
 /**
- * Remove class from the element
- * @param {Element} element The DOM element from which the class is removed
- * @param {string} classname Class to be removed
- */
+* Remove class from the element
+* @param {Element} element The DOM element from which the class is removed
+* @param {string} classname Class to be removed
+*/
 var removeClass = function (element, classname) {
   element.classList.remove(classname);
 };
 
 /**
- * Get a random integer number between the minimum number and the maximum number (inclusive)
- * @param {nunber} min
- * @param {nunber} max
- * @return {number}
- */
+* Get a random integer number between the minimum number and the maximum number (inclusive)
+* @param {nunber} min
+* @param {nunber} max
+* @return {number}
+*/
 var getRandomInt = function (min, max) {
   return Math.round(min - 0.5 + Math.random() * (max - min + 1));
 };
 
 /**
- * Get a random item from an array
- * @param {Array} array
- * @return {*}
- */
+* Get a random item from an array
+* @param {Array} array
+* @return {*}
+*/
 var getRandomArrayItem = function (array) {
   return array[getRandomInt(0, array.length - 1)];
 };
 
 /**
- * Creates a wizard with specified properties
- * @return {Object}
- */
+* Creates a wizard with specified properties
+* @return {Object}
+*/
 var generateWizard = function () {
 
-  var wizard = {
+  return {
     'name': getRandomArrayItem(WIZARDS_NAMES) + ' ' + getRandomArrayItem(WIZARDS_SURNAMES),
     'coatColor': getRandomArrayItem(WIZARDS_COATCOLORS),
     'eyesColor': getRandomArrayItem(WIZARDS_EYESCOLORS)
   };
-
-  return wizard;
 };
 
 /**
- * Creates a list of wizards
- * @param {nunber} amount Amount of wizards
- * @return {Array<Object>}
- */
+* Creates a list of wizards
+* @param {nunber} amount Amount of wizards
+* @return {Array<Object>}
+*/
 var generateWizards = function (amount) {
   var wizardsArray = [];
 
@@ -83,16 +81,16 @@ var generateWizards = function (amount) {
 };
 
 /**
- * Similar Wizard Template
- * @type {Element}
- */
+* Similar Wizard Template
+* @type {Element}
+*/
 var similarWizardTemplate = document.querySelector('#similar-wizard-template');
 
 /**
- * Creates a wizard DOM element
- * @param {Object} obj
- * @return {Element}
- */
+* Creates a wizard DOM element
+* @param {Object} obj
+* @return {Element}
+*/
 var renderWizard = function (obj) {
   var wizard = similarWizardTemplate.content.cloneNode(true);
   var name = wizard.querySelector('.setup-similar-label');
@@ -107,14 +105,14 @@ var renderWizard = function (obj) {
 };
 
 /**
- * Insert a given amount of wizards into the page
- * @param {number} amount
- */
+* Insert a given amount of wizards into the page
+* @param {number} amount
+*/
 var renderWizards = function (amount) {
   var wizardsArray = generateWizards(amount);
   var fragment = document.createDocumentFragment();
 
-  for (var i = 0; i < wizardsArray.length; i++) {
+  for (var i = 0; i < amount; i++) {
     fragment.appendChild(renderWizard(wizardsArray[i]));
   }
   document.querySelector('.setup-similar-list').appendChild(fragment);
