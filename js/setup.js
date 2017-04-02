@@ -25,10 +25,10 @@ var WIZARDS_COAT_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 
 var WIZARDS_EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 
 /**
- * Remove class from the element
- * @param {Element} element The DOM element from which the class is removed
- * @param {string} classname Class to be removed
- */
+* Remove class from the element
+* @param {Element} element The DOM element from which the class is removed
+* @param {string} classname Class to be removed
+*/
 var removeClass = function (element, classname) {
   element.classList.remove(classname);
 };
@@ -44,10 +44,10 @@ var getRandomInt = function (min, max) {
 };
 
 /**
- * Get a random item from an array
- * @param {Array} array
- * @return {*}
- */
+* Get a random item from an array
+* @param {Array} array
+* @return {*}
+*/
 var getRandomArrayItem = function (array) {
   return array[getRandomInt(0, array.length - 1)];
 };
@@ -58,13 +58,11 @@ var getRandomArrayItem = function (array) {
  */
 var generateWizard = function() {
 
-  var wizard = {
+  return {
     'name': getRandomArrayItem(WIZARDS_NAMES) + ' ' + getRandomArrayItem(WIZARDS_SURNAMES),
     'coatColor': getRandomArrayItem(WIZARDS_COAT_COLORS),
     'eyesColor': getRandomArrayItem(WIZARDS_EYES_COLORS)
   };
-
-  return wizard;
 };
 
 /**
@@ -83,6 +81,7 @@ var generateWizards = function (amount) {
 };
 
 /**
+<<<<<<< HEAD
  * Similar Wizard Template
  * @type {Node}
  */
@@ -95,6 +94,7 @@ var similarWizardTemplate = document.querySelector('#similar-wizard-template').c
  */
 var getWizardElement = function (wizardObj) {
   var wizard = similarWizardTemplate.cloneNode(true);
+
   var name = wizard.querySelector('.setup-similar-label');
   var coat = wizard.querySelector('.wizard-coat');
   var eyes = wizard.querySelector('.wizard-eyes');
@@ -107,14 +107,14 @@ var getWizardElement = function (wizardObj) {
 };
 
 /**
- * Insert a given amount of wizards into the page
- * @param {number} amount
- */
+* Insert a given amount of wizards into the page
+* @param {number} amount
+*/
 var renderWizards = function (amount) {
   var wizardsArray = generateWizards(amount);
   var fragment = document.createDocumentFragment();
 
-  for (var i = 0; i < wizardsArray.length; i++) {
+  for (var i = 0; i < amount; i++) {
     fragment.appendChild(getWizardElement(wizardsArray[i]));
   }
   document.querySelector('.setup-similar-list').appendChild(fragment);
