@@ -16,13 +16,13 @@ var WIZARDS_SURNAMES = ['да Марья', 'Верон', 'Мирабелла', '
 * Wizard's coat colors
 * @const {Array<string>}
 */
-var WIZARDS_COATCOLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
+var WIZARDS_COAT_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 
 /**
 * Wizard's eye colors
 * @const {Array<string>}
 */
-var WIZARDS_EYESCOLORS = ['black', 'red', 'blue', 'yellow', 'green'];
+var WIZARDS_EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 
 /**
  * Remove class from the element
@@ -35,12 +35,12 @@ var removeClass = function (element, classname) {
 
 /**
  * Get a random integer number between the minimum number and the maximum number (inclusive)
- * @param {nunber} min
- * @param {nunber} max
+ * @param {number} min
+ * @param {number} max
  * @return {number}
  */
 var getRandomInt = function (min, max) {
-  return Math.round(min - 0.5 + Math.random() * (max - min + 1));
+  return Math.floor(Math.random() * (max + 1 - min)) + min;
 };
 
 /**
@@ -56,12 +56,12 @@ var getRandomArrayItem = function (array) {
  * Creates a wizard with specified properties
  * @return {Object}
  */
-var generateWizard = function () {
+var generateWizard = function() {
 
   var wizard = {
     'name': getRandomArrayItem(WIZARDS_NAMES) + ' ' + getRandomArrayItem(WIZARDS_SURNAMES),
-    'coatColor': getRandomArrayItem(WIZARDS_COATCOLORS),
-    'eyesColor': getRandomArrayItem(WIZARDS_EYESCOLORS)
+    'coatColor': getRandomArrayItem(WIZARDS_COAT_COLORS),
+    'eyesColor': getRandomArrayItem(WIZARDS_EYES_COLORS)
   };
 
   return wizard;
@@ -69,7 +69,7 @@ var generateWizard = function () {
 
 /**
  * Creates a list of wizards
- * @param {nunber} amount Amount of wizards
+ * @param {number} amount Amount of wizards
  * @return {Array<Object>}
  */
 var generateWizards = function (amount) {
@@ -84,24 +84,24 @@ var generateWizards = function (amount) {
 
 /**
  * Similar Wizard Template
- * @type {Element}
+ * @type {Node}
  */
-var similarWizardTemplate = document.querySelector('#similar-wizard-template');
+var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
 
 /**
  * Creates a wizard DOM element
- * @param {Object} obj
+ * @param {Object} wizardObj
  * @return {Element}
  */
-var renderWizard = function (obj) {
-  var wizard = similarWizardTemplate.content.cloneNode(true);
+var getWizardElement = function (wizardObj) {
+  var wizard = similarWizardTemplate.cloneNode(true);
   var name = wizard.querySelector('.setup-similar-label');
   var coat = wizard.querySelector('.wizard-coat');
   var eyes = wizard.querySelector('.wizard-eyes');
 
-  name.textContent = obj.name;
-  coat.style.fill = obj.coatColor;
-  eyes.style.fill = obj.eyesColor;
+  name.textContent = wizardObj.name;
+  coat.style.fill = wizardObj.coatColor;
+  eyes.style.fill = wizardObj.eyesColor;
 
   return wizard;
 };
@@ -115,7 +115,7 @@ var renderWizards = function (amount) {
   var fragment = document.createDocumentFragment();
 
   for (var i = 0; i < wizardsArray.length; i++) {
-    fragment.appendChild(renderWizard(wizardsArray[i]));
+    fragment.appendChild(getWizardElement(wizardsArray[i]));
   }
   document.querySelector('.setup-similar-list').appendChild(fragment);
 };
