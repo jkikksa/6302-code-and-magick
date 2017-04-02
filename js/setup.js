@@ -25,13 +25,18 @@ var WIZARDS_COAT_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 
 var WIZARDS_EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 
 /**
-* Remove class from the element
-* @param {Element} element The DOM element from which the class is removed
-* @param {string} classname Class to be removed
-*/
-var removeClass = function (element, classname) {
-  element.classList.remove(classname);
-};
+ * Amount of wizards on the page
+ * @const {number}
+ */
+var WIZARDS_AMOUNT = 4;
+
+/**
+ * Toggle class 'hidden' in the element
+ * @param  {Element} element The DOM element in which the class is toggled
+ */
+var toggleHidden = function (element) {
+  element.classList.toggle('hidden');
+}
 
 /**
  * Get a random integer number between the minimum number and the maximum number (inclusive)
@@ -81,7 +86,6 @@ var generateWizards = function (amount) {
 };
 
 /**
-<<<<<<< HEAD
  * Similar Wizard Template
  * @type {Node}
  */
@@ -120,6 +124,6 @@ var renderWizards = function (amount) {
   document.querySelector('.setup-similar-list').appendChild(fragment);
 };
 
-removeClass(document.querySelector('.setup'), 'hidden');
-renderWizards(4);
-removeClass(document.querySelector('.setup-similar'), 'hidden');
+toggleHidden(document.querySelector('.setup'));
+renderWizards(WIZARDS_AMOUNT);
+toggleHidden(document.querySelector('.setup-similar'));
