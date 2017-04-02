@@ -36,7 +36,7 @@ var WIZARDS_AMOUNT = 4;
  */
 var toggleHidden = function (element) {
   element.classList.toggle('hidden');
-}
+};
 
 /**
  * Get a random integer number between the minimum number and the maximum number (inclusive)
@@ -61,7 +61,7 @@ var getRandomArrayItem = function (array) {
  * Creates a wizard with specified properties
  * @return {Object}
  */
-var generateWizard = function() {
+var generateWizard = function () {
 
   return {
     'name': getRandomArrayItem(WIZARDS_NAMES) + ' ' + getRandomArrayItem(WIZARDS_SURNAMES),
