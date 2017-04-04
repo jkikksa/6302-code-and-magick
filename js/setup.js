@@ -24,6 +24,8 @@ var WIZARDS_COAT_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 
 */
 var WIZARDS_EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 
+var WIZARDS_FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
+
 /**
  * Amount of wizards on the page
  * @const {number}
@@ -127,3 +129,85 @@ var renderWizards = function (amount) {
 toggleHidden(document.querySelector('.setup'), false);
 renderWizards(WIZARDS_AMOUNT);
 toggleHidden(document.querySelector('.setup-similar'), false);
+
+
+var setup = document.querySelector('.setup');
+var setupOpen = document.querySelector('.setup-open');
+var setupClose = document.querySelector('.setup-close');
+var setupIcon = document.querySelector('.setup-open-icon');
+
+var pressEnterHandler = function (evt) {
+  if (evt.keyCode === 13) {
+    setup.classList.toggle('invisible');
+    console.log("Ты нажал ENTER");
+  }
+};
+
+var pressEscapeHandler = function (evt) {
+  if (evt.keyCode === 27) {
+    setup.classList.add('invisible');
+    console.log("Ты нажал ESCAPE");
+  }
+};
+
+document.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === 27) {
+    if (!setup.classList.contains('invisible')) {
+      document.addEventListener('keydown', pressEscapeHandler);
+    } else {
+      document.removeEventListener('keydown', pressEscapeHandler);
+    }
+  }
+});
+
+document.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === 13) {
+    if (!setup.classList.contains('invisible')) {
+      setupClose.addEventListener('focus', pressEnterHandler);
+
+    } else {
+      // document.removeEventListener('keydown', pressEscapeHandler);
+    }
+  }
+});
+
+if (!setup.classList.contains('invisible')) {
+  document.addEventListener('keydown', pressEscapeHandler);
+} else {
+  document.removeEventListener('keydown', pressEscapeHandler);
+}
+
+setupOpen.addEventListener('click', function (evt) {
+  evt.preventDefault();
+  setup.classList.remove('invisible');
+});
+
+setupClose.addEventListener('click', function (evt) {
+  evt.preventDefault();
+  setup.classList.add('invisible');
+});
+
+setupIcon.addEventListener('focus', function (evt) {
+  document.addEventListener('keydown', pressEnterHandler);
+});
+
+setupIcon.addEventListener('blur', function (evt) {
+  document.removeEventListener('keydown', pressEnterHandler);
+});
+
+var wizard = document.querySelector('.wizard');  // а надо ли???
+var wizardCoat = wizard.querySelector('.wizard-coat');
+var wizardEyes = wizard.querySelector('.wizard-eyes');
+var wizardFireball = document.querySelector('.setup-fireball-wrap');
+
+wizardCoat.addEventListener('click', function (evt) {
+  wizardCoat.style.fill = getRandomArrayItem(WIZARDS_COAT_COLORS);
+});
+
+wizardEyes.addEventListener('click', function (evt) {
+  wizardEyes.style.fill = getRandomArrayItem(WIZARDS_EYES_COLORS);
+});
+
+wizardFireball.addEventListener('click', function (evt) {
+  wizardFireball.style.backgroundColor = getRandomArrayItem(WIZARDS_FIREBALL_COLORS);
+});
