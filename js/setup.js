@@ -31,11 +31,15 @@ var WIZARDS_EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 var WIZARDS_AMOUNT = 4;
 
 /**
- * Toggle class 'hidden' in the element
- * @param  {Element} element The DOM element in which the class is toggled
+ * Toggle class 'hidden' in the element.
+ * @param {Element} element The DOM element in which the class is toggled
+ * @param {boolean} state
  */
-var toggleHidden = function (element) {
-  element.classList.toggle('hidden');
+var setHidden = function (element, state) {
+  if (state === true) {
+    element.classList.add('hidden');
+  }
+  element.classList.remove('hidden');
 };
 
 /**
@@ -62,7 +66,6 @@ var getRandomArrayItem = function (array) {
  * @return {Object}
  */
 var generateWizard = function () {
-
   return {
     'name': getRandomArrayItem(WIZARDS_NAMES) + ' ' + getRandomArrayItem(WIZARDS_SURNAMES),
     'coatColor': getRandomArrayItem(WIZARDS_COAT_COLORS),
@@ -87,7 +90,7 @@ var generateWizards = function (amount) {
 
 /**
  * Similar Wizard Template
- * @type {Node}
+ * @type {DocumentFragment}
  */
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
 
@@ -124,6 +127,6 @@ var renderWizards = function (amount) {
   document.querySelector('.setup-similar-list').appendChild(fragment);
 };
 
-toggleHidden(document.querySelector('.setup'));
+setHidden(document.querySelector('.setup'), false);
 renderWizards(WIZARDS_AMOUNT);
-toggleHidden(document.querySelector('.setup-similar'));
+setHidden(document.querySelector('.setup-similar'), false);
