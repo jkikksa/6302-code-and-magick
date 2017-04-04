@@ -35,11 +35,8 @@ var WIZARDS_AMOUNT = 4;
  * @param {Element} element The DOM element in which the class is toggled
  * @param {boolean} state
  */
-var setHidden = function (element, state) {
-  if (state === true) {
-    element.classList.add('hidden');
-  }
-  element.classList.remove('hidden');
+var toggleHidden = function (element, state) {
+    element.classList.toggle('hidden', state);
 };
 
 /**
@@ -127,6 +124,6 @@ var renderWizards = function (amount) {
   document.querySelector('.setup-similar-list').appendChild(fragment);
 };
 
-setHidden(document.querySelector('.setup'), false);
+toggleHidden(document.querySelector('.setup'), false);
 renderWizards(WIZARDS_AMOUNT);
-setHidden(document.querySelector('.setup-similar'), false);
+toggleHidden(document.querySelector('.setup-similar'), false);
