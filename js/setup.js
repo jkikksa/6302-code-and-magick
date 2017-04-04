@@ -36,7 +36,7 @@ var WIZARDS_AMOUNT = 4;
  * @param {boolean} state
  */
 var toggleHidden = function (element, state) {
-    element.classList.toggle('hidden', state);
+  element.classList.toggle('hidden', state);
 };
 
 /**
