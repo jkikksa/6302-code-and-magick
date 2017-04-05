@@ -24,6 +24,10 @@ var WIZARDS_COAT_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 
 */
 var WIZARDS_EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 
+/**
+* Wizard's fireball colors
+* @const {Array<string>}
+*/
 var WIZARDS_FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 
 /**
@@ -31,6 +35,8 @@ var WIZARDS_FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e
  * @const {number}
  */
 var WIZARDS_AMOUNT = 4;
+var ENTER_KEY_CODE = 13;
+var ESC_KEY_CODE = 27;
 
 /**
  * Toggle class 'hidden' in the element.
@@ -130,84 +136,117 @@ toggleHidden(document.querySelector('.setup'), false);
 renderWizards(WIZARDS_AMOUNT);
 toggleHidden(document.querySelector('.setup-similar'), false);
 
-
-var setup = document.querySelector('.setup');
-var setupOpen = document.querySelector('.setup-open');
-var setupClose = document.querySelector('.setup-close');
-var setupIcon = document.querySelector('.setup-open-icon');
-
-var pressEnterHandler = function (evt) {
-  if (evt.keyCode === 13) {
-    setup.classList.toggle('invisible');
-    console.log("Ты нажал ENTER");
-  }
+/**
+ * @param {Element} input Input of the form that can be validated
+ * @return {boolean}
+ */
+var isValid = function (input) {
+  return input.validity.valid;
 };
 
-var pressEscapeHandler = function (evt) {
-  if (evt.keyCode === 27) {
-    setup.classList.add('invisible');
-    console.log("Ты нажал ESCAPE");
-  }
+/**
+ * @param {KeyboardsEvent} evt
+ * @return {boolean}
+ */
+var isEnterPressed = function (evt) {
+  return evt.keyCode === ENTER_KEY_CODE;
 };
 
-document.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === 27) {
-    if (!setup.classList.contains('invisible')) {
-      document.addEventListener('keydown', pressEscapeHandler);
-    } else {
-      document.removeEventListener('keydown', pressEscapeHandler);
+var setSetupHandlers = function () {
+  var setup = document.querySelector('.setup');
+  var setupOpen = document.querySelector('.setup-open');
+  var setupClose = setup.querySelector('.setup-close');
+  var setupOpenIcon = setupOpen.querySelector('.setup-open-icon');
+  var setupSubmit = setup.querySelector('.setup-submit');
+  var setupInput = setup.querySelector('.setup-user-name');
+
+  /**
+   * @param {KeyboardsEvent} evt
+   */
+  var pressEscHandler = function (evt) {
+    if (evt.keyCode === ESC_KEY_CODE) {
+      closePopup();
     }
+  };
+
+  /**
+   * @return {boolean}
+   */
+  var isOpenedPopup = function () {
+    return !setup.classList.contains('hidden');
+  };
+
+  if (isOpenedPopup()) {
+    document.addEventListener('keydown', pressEscHandler);
   }
-});
 
-document.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === 13) {
-    if (!setup.classList.contains('invisible')) {
-      setupClose.addEventListener('focus', pressEnterHandler);
+  var openPopup = function () {
+    setup.classList.remove('hidden');
+    document.addEventListener('keydown', pressEscHandler);
+  };
 
-    } else {
-      // document.removeEventListener('keydown', pressEscapeHandler);
+  var closePopup = function () {
+    setup.classList.add('hidden');
+    document.removeEventListener('keydown', pressEscHandler);
+  };
+
+  setupOpen.addEventListener('click', function (evt) {
+    openPopup();
+  });
+
+  setupClose.addEventListener('click', function (evt) {
+    closePopup();
+  });
+
+  setupOpenIcon.addEventListener('keydown', function (evt) {
+    if (isEnterPressed(evt)) {
+      openPopup();
     }
-  }
-});
+  });
 
-if (!setup.classList.contains('invisible')) {
-  document.addEventListener('keydown', pressEscapeHandler);
-} else {
-  document.removeEventListener('keydown', pressEscapeHandler);
-}
+  setupClose.addEventListener('keydown', function (evt) {
+    if (isEnterPressed(evt)) {
+      closePopup();
+    }
+  });
 
-setupOpen.addEventListener('click', function (evt) {
-  evt.preventDefault();
-  setup.classList.remove('invisible');
-});
+  setupInput.addEventListener('keydown', function (evt) {
+    evt.stopPropagation();
+  });
 
-setupClose.addEventListener('click', function (evt) {
-  evt.preventDefault();
-  setup.classList.add('invisible');
-});
+  setupSubmit.addEventListener('click', function (evt) {
+    evt.preventDefault();
+    if (isValid(setupInput)) {
+      closePopup();
+    }
+  });
 
-setupIcon.addEventListener('focus', function (evt) {
-  document.addEventListener('keydown', pressEnterHandler);
-});
+  setupSubmit.addEventListener('keydown', function (evt) {
+    evt.preventDefault();
+    if (isEnterPressed(evt)) {
+      closePopup();
+    }
+  });
+};
 
-setupIcon.addEventListener('blur', function (evt) {
-  document.removeEventListener('keydown', pressEnterHandler);
-});
+var setWizardHandlers = function () {
+  var wizard = document.querySelector('.wizard');
+  var wizardCoat = wizard.querySelector('.wizard-coat');
+  var wizardEyes = wizard.querySelector('.wizard-eyes');
+  var wizardFireball = document.querySelector('.setup-fireball-wrap');
 
-var wizard = document.querySelector('.wizard');  // а надо ли???
-var wizardCoat = wizard.querySelector('.wizard-coat');
-var wizardEyes = wizard.querySelector('.wizard-eyes');
-var wizardFireball = document.querySelector('.setup-fireball-wrap');
+  wizardCoat.addEventListener('click', function (evt) {
+    wizardCoat.style.fill = getRandomArrayItem(WIZARDS_COAT_COLORS);
+  });
 
-wizardCoat.addEventListener('click', function (evt) {
-  wizardCoat.style.fill = getRandomArrayItem(WIZARDS_COAT_COLORS);
-});
+  wizardEyes.addEventListener('click', function (evt) {
+    wizardEyes.style.fill = getRandomArrayItem(WIZARDS_EYES_COLORS);
+  });
 
-wizardEyes.addEventListener('click', function (evt) {
-  wizardEyes.style.fill = getRandomArrayItem(WIZARDS_EYES_COLORS);
-});
+  wizardFireball.addEventListener('click', function (evt) {
+    wizardFireball.style.backgroundColor = getRandomArrayItem(WIZARDS_FIREBALL_COLORS);
+  });
+};
 
-wizardFireball.addEventListener('click', function (evt) {
-  wizardFireball.style.backgroundColor = getRandomArrayItem(WIZARDS_FIREBALL_COLORS);
-});
+setSetupHandlers();
+setWizardHandlers();
