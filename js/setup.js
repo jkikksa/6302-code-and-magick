@@ -35,7 +35,15 @@ var WIZARDS_FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e
  * @const {number}
  */
 var WIZARDS_AMOUNT = 4;
+
+/**
+ * @const {Number}
+ */
 var ENTER_KEY_CODE = 13;
+
+/**
+ * @const {Number}
+ */
 var ESC_KEY_CODE = 27;
 
 /**
