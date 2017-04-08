@@ -37,14 +37,13 @@ var WIZARDS_FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e
 var WIZARDS_AMOUNT = 4;
 
 /**
- * @const {number}
+ * Keyboard key codes
+ * @enum {number}
  */
-var ENTER_KEY_CODE = 13;
-
-/**
- * @const {number}
- */
-var ESC_KEY_CODE = 27;
+var keyCodes = {
+  'ENTER': 13,
+  'ESQ': 27
+};
 
 /**
  * Toggle class 'hidden' in the element.
@@ -148,7 +147,7 @@ toggleHidden(document.querySelector('.setup-similar'), false);
  * @return {boolean}
  */
 var isEnterPressed = function (evt) {
-  return evt.keyCode === ENTER_KEY_CODE;
+  return evt.keyCode === keyCodes.ENTER;
 };
 
 var setup = document.querySelector('.setup');
@@ -162,7 +161,7 @@ var setupInput = setup.querySelector('.setup-user-name');
  * @param {KeyboardEvent} evt
  */
 var escPressHandler = function (evt) {
-  if (evt.keyCode === ESC_KEY_CODE) {
+  if (evt.keyCode === keyCodes.ESQ) {
     closePopup();
   }
 };
