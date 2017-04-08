@@ -41,8 +41,8 @@ var WIZARDS_AMOUNT = 4;
  * @enum {number}
  */
 var keyCodes = {
-  'ENTER': 13,
-  'ESQ': 27
+  ENTER: 13,
+  ESQ: 27
 };
 
 /**
