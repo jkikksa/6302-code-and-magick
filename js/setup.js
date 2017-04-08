@@ -37,12 +37,12 @@ var WIZARDS_FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e
 var WIZARDS_AMOUNT = 4;
 
 /**
- * @const {Number}
+ * @const {number}
  */
 var ENTER_KEY_CODE = 13;
 
 /**
- * @const {Number}
+ * @const {number}
  */
 var ESC_KEY_CODE = 27;
 
@@ -140,20 +140,11 @@ var renderWizards = function (amount) {
   document.querySelector('.setup-similar-list').appendChild(fragment);
 };
 
-toggleHidden(document.querySelector('.setup'), false);
 renderWizards(WIZARDS_AMOUNT);
 toggleHidden(document.querySelector('.setup-similar'), false);
 
 /**
- * @param {Element} input Input of the form that can be validated
- * @return {boolean}
- */
-var isValid = function (input) {
-  return input.validity.valid;
-};
-
-/**
- * @param {KeyboardsEvent} evt
+ * @param {KeyboardEvent} evt
  * @return {boolean}
  */
 var isEnterPressed = function (evt) {
@@ -168,33 +159,22 @@ var setupSubmit = setup.querySelector('.setup-submit');
 var setupInput = setup.querySelector('.setup-user-name');
 
 /**
- * @param {KeyboardsEvent} evt
+ * @param {KeyboardEvent} evt
  */
-var pressEscHandler = function (evt) {
+var escPressHandler = function (evt) {
   if (evt.keyCode === ESC_KEY_CODE) {
     closePopup();
   }
 };
 
-/**
- * @return {boolean}
- */
-var isOpenedPopup = function () {
-  return !setup.classList.contains('hidden');
-};
-
-if (isOpenedPopup()) {
-  document.addEventListener('keydown', pressEscHandler);
-}
-
 var openPopup = function () {
   setup.classList.remove('hidden');
-  document.addEventListener('keydown', pressEscHandler);
+  document.addEventListener('keydown', escPressHandler);
 };
 
 var closePopup = function () {
   setup.classList.add('hidden');
-  document.removeEventListener('keydown', pressEscHandler);
+  document.removeEventListener('keydown', escPressHandler);
 };
 
 setupOpen.addEventListener('click', function (evt) {
@@ -223,14 +203,7 @@ setupInput.addEventListener('keydown', function (evt) {
 
 setupSubmit.addEventListener('click', function (evt) {
   evt.preventDefault();
-  if (isValid(setupInput)) {
-    closePopup();
-  }
-});
-
-setupSubmit.addEventListener('keydown', function (evt) {
-  evt.preventDefault();
-  if (isEnterPressed(evt)) {
+  if (setupInput.validity.valid) {
     closePopup();
   }
 });
