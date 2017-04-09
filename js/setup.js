@@ -40,9 +40,9 @@ var WIZARDS_AMOUNT = 4;
  * Keyboard key codes
  * @enum {number}
  */
-var keyCodes = {
+var KeyCodes = {
   ENTER: 13,
-  ESQ: 27
+  ESC: 27
 };
 
 /**
@@ -147,7 +147,7 @@ toggleHidden(document.querySelector('.setup-similar'), false);
  * @return {boolean}
  */
 var isEnterPressed = function (evt) {
-  return evt.keyCode === keyCodes.ENTER;
+  return evt.keyCode === KeyCodes.ENTER;
 };
 
 var setup = document.querySelector('.setup');
@@ -161,7 +161,7 @@ var setupInput = setup.querySelector('.setup-user-name');
  * @param {KeyboardEvent} evt
  */
 var escPressHandler = function (evt) {
-  if (evt.keyCode === keyCodes.ESQ) {
+  if (evt.keyCode === KeyCodes.ESC) {
     closePopup();
   }
 };
@@ -201,8 +201,8 @@ setupInput.addEventListener('keydown', function (evt) {
 });
 
 setupSubmit.addEventListener('click', function (evt) {
-  evt.preventDefault();
   if (setupInput.validity.valid) {
+    evt.preventDefault();
     closePopup();
   }
 });
