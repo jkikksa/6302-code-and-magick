@@ -12,6 +12,7 @@ body {
   color: #ffffff;
 
   background: #da641a;
+  overflow-y: scroll;
 }
 
 h1,
