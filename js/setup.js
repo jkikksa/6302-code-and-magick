@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Amount of wizards on the page
+ * Amount of similar wizards on the page
  * @const {number}
  */
 var WIZARDS_AMOUNT = 4;
