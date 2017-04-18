@@ -10,6 +10,14 @@
   var setupInput = setup.querySelector('.setup-user-name');
 
   /**
+   * Reset setup window positions
+   */
+  var resetPosition = function () {
+    setup.style.left = '';
+    setup.style.top = '';
+  };
+
+  /**
    * @param {KeyboardEvent} evt
    */
   var escPressHandler = function (evt) {
@@ -26,6 +34,7 @@
   var closePopup = function () {
     setup.classList.add('hidden');
     document.removeEventListener('keydown', escPressHandler);
+    resetPosition();
   };
 
   setupOpen.addEventListener('click', function (evt) {
@@ -65,7 +74,44 @@
    */
   var WIZARDS_AMOUNT = 4;
 
-  window.similarWizards(WIZARDS_AMOUNT);
+  window.renderWizards(WIZARDS_AMOUNT);
   window.utils.toggleHidden(document.querySelector('.setup-similar'), false);
+
+  var shop = document.querySelector('.setup-artifacts-shop');
+  var inventory = document.querySelector('.setup-artifacts');
+  var draggedItem = null;
+
+  shop.addEventListener('dragstart', function (evt) {
+    if (evt.target.tagName.toLowerCase() === 'img') {
+      draggedItem = evt.target;
+      evt.dataTransfer.setData('text/plain', evt.target.alt);
+      inventory.classList.add('dropzone');
+    }
+  });
+
+  shop.addEventListener('dragend', function (evt) {
+    inventory.classList.remove('dropzone');
+  });
+
+  inventory.addEventListener('dragover', function (evt) {
+    evt.preventDefault();
+    return false;
+  });
+
+  inventory.addEventListener('drop', function (evt) {
+    evt.target.style.backgroundColor = '';
+    evt.target.appendChild(draggedItem);
+    inventory.classList.remove('dropzone');
+  });
+
+  inventory.addEventListener('dragenter', function (evt) {
+    evt.target.style.backgroundColor = 'yellow';
+    evt.preventDefault();
+  });
+
+  inventory.addEventListener('dragleave', function (evt) {
+    evt.target.style.backgroundColor = '';
+    evt.preventDefault();
+  });
 
 })();

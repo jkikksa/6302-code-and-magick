@@ -1,6 +1,6 @@
 'use strict';
 
-window.wizardsGetter = (function () {
+window.getWizards = (function () {
 
   /**
   * List of names of wizards
@@ -30,7 +30,7 @@ window.wizardsGetter = (function () {
    * Creates a wizard with specified properties
    * @return {Object}
    */
-  var generateWizard = function () {
+  var getWizard = function () {
     return {
       'name': window.utils.getRandomArrayItem(WIZARDS_NAMES) + ' ' + window.utils.getRandomArrayItem(WIZARDS_SURNAMES),
       'coatColor': window.utils.getRandomArrayItem(WIZARDS_COAT_COLORS),
@@ -43,16 +43,14 @@ window.wizardsGetter = (function () {
    * @param {number} amount Amount of wizards
    * @return {Array<Object>}
    */
-  var generateWizards = function (amount) {
+  return function (amount) {
     var wizardsArray = [];
 
     for (var i = 0; i < amount; i++) {
-      wizardsArray.push(generateWizard());
+      wizardsArray.push(getWizard());
     }
 
     return wizardsArray;
   };
-
-  return generateWizards;
 
 })();
