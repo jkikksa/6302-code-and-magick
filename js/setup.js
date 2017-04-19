@@ -8,6 +8,7 @@
   var setupOpenIcon = setupOpen.querySelector('.setup-open-icon');
   var setupSubmit = setup.querySelector('.setup-submit');
   var setupInput = setup.querySelector('.setup-user-name');
+  var setupHandle = setup.querySelector('.setup-user-pic');
 
   /**
    * Reset setup window positions
@@ -76,6 +77,8 @@
 
   window.renderWizards(WIZARDS_AMOUNT);
   window.utils.toggleHidden(document.querySelector('.setup-similar'), false);
+
+  window.makeDraggable(setupHandle, setup);
 
   var shop = document.querySelector('.setup-artifacts-shop');
   var inventory = document.querySelector('.setup-artifacts');
