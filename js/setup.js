@@ -21,7 +21,7 @@
   /**
    * @param {KeyboardEvent} evt
    */
-  var escPressHandler = function (evt) {
+  var onEscPress = function (evt) {
     if (window.utils.isEscapePressed(evt)) {
       closePopup();
     }
@@ -29,12 +29,12 @@
 
   var openPopup = function () {
     setup.classList.remove('hidden');
-    document.addEventListener('keydown', escPressHandler);
+    document.addEventListener('keydown', onEscPress);
   };
 
   var closePopup = function () {
     setup.classList.add('hidden');
-    document.removeEventListener('keydown', escPressHandler);
+    document.removeEventListener('keydown', onEscPress);
     resetPosition();
   };
 

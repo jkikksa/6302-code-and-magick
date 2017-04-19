@@ -2,6 +2,11 @@
 
 window.makeDraggable = (function () {
 
+  /**
+   * Makes element draggable.
+   * @param {Element} handle The handle for which the element is dragged
+   * @param {Element} element What is dragged?
+   */
   return function (handle, element) {
 
     handle.addEventListener('mousedown', function (evt) {
