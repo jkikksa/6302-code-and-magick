@@ -704,6 +704,10 @@ input[type=radio]:checked + .review-mark-label {
   box-sizing: border-box;
 }
 
+.setup-artifacts-cell img {
+  cursor: move;
+}
+
 .setup-artifacts-cell:last-child {
   border-right-width: 1px;
 }
