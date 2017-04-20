@@ -1,6 +1,6 @@
 'use strict';
 
-window.similarWizards = (function () {
+window.renderWizards = (function () {
 
   /**
    * Similar Wizard Template
@@ -31,8 +31,8 @@ window.similarWizards = (function () {
   * Insert a given amount of wizards into the page
   * @param {number} amount
   */
-  var renderWizards = function (amount) {
-    var wizardsArray = window.wizardsGetter(amount);
+  return function (amount) {
+    var wizardsArray = window.getWizards(amount);
     var fragment = document.createDocumentFragment();
 
     for (var i = 0; i < amount; i++) {
@@ -40,7 +40,5 @@ window.similarWizards = (function () {
     }
     document.querySelector('.setup-similar-list').appendChild(fragment);
   };
-
-  return renderWizards;
 
 })();

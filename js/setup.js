@@ -8,11 +8,20 @@
   var setupOpenIcon = setupOpen.querySelector('.setup-open-icon');
   var setupSubmit = setup.querySelector('.setup-submit');
   var setupInput = setup.querySelector('.setup-user-name');
+  var setupHandle = setup.querySelector('.setup-user-pic');
+
+  /**
+   * Reset setup window positions
+   */
+  var resetPosition = function () {
+    setup.style.left = '';
+    setup.style.top = '';
+  };
 
   /**
    * @param {KeyboardEvent} evt
    */
-  var escPressHandler = function (evt) {
+  var onEscPress = function (evt) {
     if (window.utils.isEscapePressed(evt)) {
       closePopup();
     }
@@ -20,12 +29,13 @@
 
   var openPopup = function () {
     setup.classList.remove('hidden');
-    document.addEventListener('keydown', escPressHandler);
+    document.addEventListener('keydown', onEscPress);
   };
 
   var closePopup = function () {
     setup.classList.add('hidden');
-    document.removeEventListener('keydown', escPressHandler);
+    document.removeEventListener('keydown', onEscPress);
+    resetPosition();
   };
 
   setupOpen.addEventListener('click', function (evt) {
@@ -65,7 +75,10 @@
    */
   var WIZARDS_AMOUNT = 4;
 
-  window.similarWizards(WIZARDS_AMOUNT);
+  window.renderWizards(WIZARDS_AMOUNT);
   window.utils.toggleHidden(document.querySelector('.setup-similar'), false);
+
+  window.makeDraggable(setupHandle, setup);
+
 
 })();
