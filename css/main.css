@@ -600,6 +600,10 @@ input[type=radio]:checked + .review-mark-label {
   vertical-align: middle;
 }
 
+.setup-user-pic {
+  cursor: move;
+}
+
 .setup-user-name {
   background: transparent;
   border: 0;
@@ -817,4 +821,8 @@ input[type=radio]:checked + .review-mark-label {
 
 .dropzone {
   outline: 2px dashed red;
+}
+
+.dropitem {
+  background-color: yellow;
 }
