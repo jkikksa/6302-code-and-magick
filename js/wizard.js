@@ -25,26 +25,15 @@
   var wizardEyes = wizard.querySelector('.wizard-eyes');
   var wizardFireball = document.querySelector('.setup-fireball-wrap');
 
-  /**
-   * @param {Element} element
-   * @param {Array<string>} colors
-   * @param {Function} callback
-   */
-  var colorizeWizardElement = function (element, colors, callback) {
-    element.addEventListener('click', function () {
-      callback(window.utils.getRandomArrayItem(colors));
-    });
-  };
-
-  colorizeWizardElement(wizardCoat, WIZARD_COAT_COLORS, function (color) {
+  window.colorizeElement(wizardCoat, WIZARD_COAT_COLORS, function (color) {
     wizardCoat.style.fill = color;
   });
 
-  colorizeWizardElement(wizardEyes, WIZARD_EYES_COLORS, function (color) {
+  window.colorizeElement(wizardEyes, WIZARD_EYES_COLORS, function (color) {
     wizardEyes.style.fill = color;
   });
 
-  colorizeWizardElement(wizardFireball, WIZARD_FIREBALL_COLORS, function (color) {
+  window.colorizeElement(wizardFireball, WIZARD_FIREBALL_COLORS, function (color) {
     wizardFireball.style.backgroundColor = color;
   });
 })();
