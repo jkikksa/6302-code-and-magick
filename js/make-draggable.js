@@ -1,10 +1,25 @@
 'use strict';
 
 window.makeDraggable = (function () {
-  var _element;
+
+  /**
+   * @type {Element}
+   */
+  var _element = null;
+
+  /**
+   * @type {Object<string, number>}
+   */
   var startCoords = {};
+
+  /**
+   * @type {Object<string, number>}
+   */
   var shift = {};
 
+  /**
+   * @param {MouseEvent} evt
+   */
   var onMouseMove = function (evt) {
     evt.preventDefault();
 
@@ -22,6 +37,9 @@ window.makeDraggable = (function () {
     _element.style.left = (_element.offsetLeft - shift.x) + 'px';
   };
 
+  /**
+   * @param {MouseEvent} evt
+   */
   var onMouseUp = function (evt) {
     evt.preventDefault();
 

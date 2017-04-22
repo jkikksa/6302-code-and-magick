@@ -78,7 +78,7 @@
   window.renderWizards(WIZARDS_AMOUNT);
   window.utils.toggleHidden(document.querySelector('.setup-similar'), false);
 
-  window.makeDraggable(setupHandle, setup);
+  window.makeDraggable(setupHandle, setup, document.querySelector('header'));
 
 
 })();
