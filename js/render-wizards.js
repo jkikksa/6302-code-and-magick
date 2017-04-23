@@ -21,8 +21,8 @@ window.renderWizards = (function () {
     var eyes = wizard.querySelector('.wizard-eyes');
 
     name.textContent = wizardObj.name;
-    coat.style.fill = wizardObj.coatColor;
-    eyes.style.fill = wizardObj.eyesColor;
+    coat.style.fill = wizardObj.colorCoat;
+    eyes.style.fill = wizardObj.colorEyes;
 
     return wizard;
   };
@@ -32,13 +32,19 @@ window.renderWizards = (function () {
   * @param {number} amount
   */
   return function (amount) {
-    var wizardsArray = window.getWizards(amount);
-    var fragment = document.createDocumentFragment();
 
-    for (var i = 0; i < amount; i++) {
-      fragment.appendChild(getWizardElement(wizardsArray[i]));
-    }
-    document.querySelector('.setup-similar-list').appendChild(fragment);
+    /**
+     * @param  {Array<Object>} wizardsArray
+     */
+    var onLoad = function (wizardsArray) {
+      var fragment = document.createDocumentFragment();
+
+      for (var i = 0; i < amount; i++) {
+        fragment.appendChild(getWizardElement(window.utils.getRandomArrayItem(wizardsArray)));
+      }
+      document.querySelector('.setup-similar-list').appendChild(fragment);
+    };
+
+    window.load('https://intensive-javascript-server-kjgvxfepjl.now.sh/code-and-magick/data', onLoad);
   };
-
 })();
