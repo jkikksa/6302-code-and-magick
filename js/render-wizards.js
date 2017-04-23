@@ -28,16 +28,18 @@ window.renderWizards = (function () {
   };
 
   /**
-  * @param  {Array<Object>} wizards
+  * Insert a given amount of wizards into the page
+  * @param {Array<Object>} wizards
+  * @param {number} amount
   */
-  return function (wizards) {
+  return function (wizards, amount) {
     var fragment = document.createDocumentFragment();
+    document.querySelector('.setup-similar-list').innerHTML = '';
 
-    for (var i = 0; i < wizards.length; i++) {
+    for (var i = 0; i < amount; i++) {
       fragment.appendChild(getWizardElement(wizards[i]));
     }
     document.querySelector('.setup-similar-list').appendChild(fragment);
   };
-
 
 })();
