@@ -28,23 +28,16 @@ window.renderWizards = (function () {
   };
 
   /**
-  * Insert a given amount of wizards into the page
-  * @param {number} amount
+  * @param  {Array<Object>} wizards
   */
-  return function (amount) {
+  return function (wizards) {
+    var fragment = document.createDocumentFragment();
 
-    /**
-     * @param  {Array<Object>} wizardsArray
-     */
-    var onLoad = function (wizardsArray) {
-      var fragment = document.createDocumentFragment();
-
-      for (var i = 0; i < amount; i++) {
-        fragment.appendChild(getWizardElement(window.utils.getRandomArrayItem(wizardsArray)));
-      }
-      document.querySelector('.setup-similar-list').appendChild(fragment);
-    };
-
-    window.load('https://intensive-javascript-server-kjgvxfepjl.now.sh/code-and-magick/data', onLoad);
+    for (var i = 0; i < wizards.length; i++) {
+      fragment.appendChild(getWizardElement(wizards[i]));
+    }
+    document.querySelector('.setup-similar-list').appendChild(fragment);
   };
+
+
 })();
