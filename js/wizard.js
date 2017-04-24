@@ -47,26 +47,20 @@ window.wizard = (function () {
   var currentCoatColor = null;
   var currentEyesColor = null;
 
-  wizardCoat.addEventListener('click', function () {
-    window.colorizeElement(WIZARD_COAT_COLORS, function (color) {
-      wizardCoat.style.fill = color;
-      currentCoatColor = color;
-    });
+  window.colorizeElement(wizardCoat, WIZARD_COAT_COLORS, function (color) {
+    wizardCoat.style.fill = color;
+    currentCoatColor = color;
     window.wizard.onCoatChange(currentCoatColor);
   });
 
-  wizardEyes.addEventListener('click', function () {
-    window.colorizeElement(WIZARD_EYES_COLORS, function (color) {
-      wizardEyes.style.fill = color;
-      currentEyesColor = color;
-    });
+  window.colorizeElement(wizardEyes, WIZARD_EYES_COLORS, function (color) {
+    wizardEyes.style.fill = color;
+    currentEyesColor = color;
     window.wizard.onEyesChange(currentEyesColor);
   });
 
-  wizardFireball.addEventListener('click', function () {
-    window.colorizeElement(WIZARD_FIREBALL_COLORS, function (color) {
-      wizardFireball.style.backgroundColor = color;
-    });
+  window.colorizeElement(wizardFireball, WIZARD_FIREBALL_COLORS, function (color) {
+    wizardFireball.style.backgroundColor = color;
   });
 
   return {
