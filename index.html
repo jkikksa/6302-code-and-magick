@@ -152,6 +152,10 @@
   <p><a href="http://htmlacademy.ru" class="footer-link"><img src="img/htmlacademy-logo.png" alt="HTML Academy"
                                                               width="130">Сделано в HTML Academy</a>в 2017 году</p>
 </footer>
+<div class="modal-error hidden">
+  <div class="modal-error__title">Внимание! Произошла ошибка!</div>
+  <div class="modal-error__error-message"></div>
+</div>
 
 <template id="similar-wizard-template" style="display: none">
   <div class="setup-similar-item">
@@ -187,6 +191,8 @@
   };
 </script>
 <script src="js/utils.js"></script>
+<script src="js/load.js"></script>
+<script src="js/modal-error.js"></script>
 <script src="js/colorize-element.js"></script>
 <script src="js/get-wizards.js"></script>
 <script src="js/render-wizards.js"></script>

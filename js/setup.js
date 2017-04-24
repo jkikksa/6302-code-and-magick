@@ -75,10 +75,18 @@
    */
   var WIZARDS_AMOUNT = 4;
 
-  window.renderWizards(WIZARDS_AMOUNT);
+  window.load('https://intensive-javascript-server-kjgvxfepjl.now.sh/code-and-magick/data', function (wizardsList) {
+    var wizards = [];
+
+    for (var i = 0; i < WIZARDS_AMOUNT; i++) {
+      wizards.push(window.utils.getRandomArrayItem(wizardsList));
+    }
+
+    window.renderWizards(wizards);
+  });
+
   window.utils.toggleHidden(document.querySelector('.setup-similar'), false);
 
   window.makeDraggable(setupHandle, setup, document.querySelector('header'));
-
 
 })();

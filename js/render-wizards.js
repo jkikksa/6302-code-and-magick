@@ -21,24 +21,23 @@ window.renderWizards = (function () {
     var eyes = wizard.querySelector('.wizard-eyes');
 
     name.textContent = wizardObj.name;
-    coat.style.fill = wizardObj.coatColor;
-    eyes.style.fill = wizardObj.eyesColor;
+    coat.style.fill = wizardObj.colorCoat;
+    eyes.style.fill = wizardObj.colorEyes;
 
     return wizard;
   };
 
   /**
-  * Insert a given amount of wizards into the page
-  * @param {number} amount
+  * @param  {Array<Object>} wizards
   */
-  return function (amount) {
-    var wizardsArray = window.getWizards(amount);
+  return function (wizards) {
     var fragment = document.createDocumentFragment();
 
-    for (var i = 0; i < amount; i++) {
-      fragment.appendChild(getWizardElement(wizardsArray[i]));
+    for (var i = 0; i < wizards.length; i++) {
+      fragment.appendChild(getWizardElement(wizards[i]));
     }
     document.querySelector('.setup-similar-list').appendChild(fragment);
   };
+
 
 })();
